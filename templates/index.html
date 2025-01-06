@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Monoton&display=swap">
+    <title>Blackjack Card Counter</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <span class="text">Blackjack Card Counter</span>
+        <img src="{{ url_for('static', filename='bj_image.png') }}" class="image" alt="Blackjack Icon">
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="content">
+        <div class="video-container">
+            <img id="video" src="{{ url_for('video_feed') }}" class="video" alt="Video Feed">
+        </div>
+        <div class="count-container">
+            <p>Current card count:</p>
+            <span id="card-count">{{ card_count }}</span>
+            <p id="bet-alert" class="hidden">INCREASE BET SIZE!!!</p>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p class="footer">© 2024 Braeden Turner</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Function to update the card count and handle the flashing message
+        function updateCardCount(newCount) {
+            const countElement = document.getElementById('card-count');
+            const betAlert = document.getElementById('bet-alert');
+
+            // Updates the card count display
+            countElement.textContent = newCount;
+
+            // Shows/hides the flashing depending on the count
+            if (newCount >= 3) {
+                betAlert.classList.remove('hidden');
+                betAlert.classList.add('flash');
+            } else {
+                betAlert.classList.add('hidden');
+                betAlert.classList.remove('flash');
+            }
+        }
+
+        // Function to periodically fetch the card count from the backend server
+        function fetchCardCount() {
+            fetch('/card_count')
+                .then(response => response.json())
+                .then(data => {
+                    const newCount = data.cardCount;
+                    updateCardCount(newCount);
+                })
+                .catch(error => console.error('Error fetching card count:', error));
+        }
+        // Fetch the card count every 1000 milliseconds
+        setInterval(fetchCardCount, 1000);
+    </script>
+</body>
+</html>
