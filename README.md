@@ -1,3 +1,3 @@
 # Blackjack CardCounter
 
-A computer vision project that keeps a live count for blackjack card counting.
+[![Demo Video](https://img.youtube.com/vi/<aDibmcqx6yg&ab_channel=BraedenTurner>/0.jpg)](https://www.youtube.com/watch?v=<aDibmcqx6yg&ab_channel=BraedenTurner>)
