@@ -2,7 +2,7 @@
 
 [![Demo Video](https://img.youtube.com/vi/aDibmcqx6yg/0.jpg)](https://youtu.be/aDibmcqx6yg)
 
-##What It Does
+## What It Does
 
 This project utilizes the YOLOv8 computer vision model—trained to identify cards from a classic deck of cards—to keep a live count of the deck of cards for blackjack card counting.
 
